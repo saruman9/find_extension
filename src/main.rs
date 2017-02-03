@@ -45,7 +45,7 @@ fn visit_dirs(dir: &Path, extensions: &mut HashMap<String, Vec<String>>) -> io::
                 match entry.path().extension() {
                     Some(ext) => {
                         let paths = extensions.entry(ext.to_str().unwrap().to_string()).or_insert(Vec::new());
-                        paths.push(entry.path().to_str().unwrap().to_string());
+                        paths.push(entry.path().to_str().unwrap_or_default().to_string());
                     }
                     None => {
                         let paths = extensions.entry("NO_EXT".to_string()).or_insert(Vec::new());
